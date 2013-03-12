@@ -33,7 +33,13 @@ public class CombineCSV
 		}
 	}
 
-	
+
+	public void writeCSVHeader(String[] header)
+	{
+		writer.write(header);
+	}
+
+
 	private String[] join(String[]... arrays)
 	{
 		int size = 0;

@@ -1,22 +1,29 @@
-import java.io.FileReader;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Files;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import au.com.bytecode.opencsv.CSVReader;
 
 
 public class CSVFileReader
 {
-	private final String filePath;
+	private final Path filePath;
 	private CSVReader reader;
 
 	public CSVFileReader(String filePath)
 	{
-		this.filePath = filePath;
-
+		this.filePath = FileSystems.getDefault().getPath(filePath);
+		Charset charset = Charset.forName("US-ASCII");
+		
 		try
 		{
-			reader = new CSVReader(new FileReader(this.filePath));
+			BufferedReader bufferdReader = Files.newBufferedReader(this.filePath, charset);
+			reader = new CSVReader(bufferdReader);
 		}
 		catch(Exception e)
 		{
