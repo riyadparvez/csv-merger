@@ -117,7 +117,14 @@ public class CombineCSV
 
 			for(int i=0; i<readers.length; i++)
 			{
-				readers[i].close();
+				try
+				{
+					readers[i].close();
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
 			}
 		}
 		catch(Exception e)
